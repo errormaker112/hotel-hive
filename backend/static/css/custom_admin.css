@@ -1,0 +1,96 @@
+/* Hide the top navbar entirely */
+.main-header, .navbar {
+    display: none !important;
+}
+
+/* Hide the pushmenu toggle button specifically */
+[data-widget="pushmenu"], .nav-link[data-widget="pushmenu"] {
+    display: none !important;
+}
+
+/* Ensure the sidebar is always visible and doesn't collapse */
+.main-sidebar {
+    display: block !important;
+    width: 250px !important;
+}
+
+/* Ensure the content wrapper takes the full remaining width and starts from the top */
+.content-wrapper {
+    margin-left: 250px !important;
+    margin-top: 0 !important;
+    padding-top: 20px !important;
+    min-height: 100vh !important;
+    width: calc(100% - 250px) !important;
+}
+
+/* For mobile, allow the sidebar to behave normally or hide it */
+@media (max-width: 991.98px) {
+    .content-wrapper {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+}
+
+/* Full width layout adjustment for all containers */
+.container, .container-fluid, .content {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* Rounded corners for buttons and cards */
+.btn, .card, .card-header, .info-box, .form-control, .select2-container--default .select2-selection--single {
+    border-radius: 12px !important;
+}
+
+/* User Profile Sidebar Adjustment - Forced Vertical Layout */
+.main-sidebar .user-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 1.5rem 0.5rem !important;
+    border-bottom: 1px solid #4f5962 !important;
+    margin-bottom: 1rem !important;
+}
+
+.main-sidebar .user-panel .image {
+    padding-left: 0 !important;
+    margin-bottom: 0.75rem !important;
+    display: block !important;
+    float: none !important;
+}
+
+.main-sidebar .user-panel .image img {
+    width: 90px !important;
+    height: 90px !important;
+    margin: 0 auto !important;
+}
+
+.main-sidebar .user-panel .info {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+    text-align: center !important;
+    float: none !important;
+    margin: 0 !important;
+}
+
+.main-sidebar .user-panel .info a {
+    display: block !important;
+    white-space: normal !important;
+    font-size: 0.85rem !important;
+    padding: 5px !important;
+    word-break: break-all !important;
+    line-height: 1.2 !important;
+}
+
+/* Hide App Labels (Headers) in Sidebar */
+.nav-sidebar .nav-header {
+    display: none !important;
+}
+
+/* Optional: Add a bit more spacing between items since headers are gone */
+.nav-sidebar .nav-item {
+    margin-bottom: 2px !important;
+}
+

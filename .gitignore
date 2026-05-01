@@ -1,0 +1,43 @@
+# === FRONTEND (React) ===
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+
+# Frontend env files
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+
+# === BACKEND (Django) ===
+backend/__pycache__/
+backend/**/*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+backend/venv/
+backend/.venv/
+backend/env/
+backend/.env/
+backend/env.bak/
+backend/.env.bak/
+
+# Static and media
+backend/staticfiles/
+backend/media/
+
+# SQLite database (if used)
+*.sqlite3
+
+# === LOGS ===
+logs/
+*.log
+npm-debug.log*
+
+# === IDEs and OS Files ===
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

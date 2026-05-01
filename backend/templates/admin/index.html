@@ -1,0 +1,190 @@
+{% extends "admin/index.html" %}
+{% load i18n static %}
+
+{% block content %}
+<style>
+    .small-box {
+        border-radius: 12px !important;
+        position: relative;
+        display: block;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        color: #ffffff !important;
+        overflow: hidden !important; /* Fix icon overflow */
+        height: 140px; /* Consistent height */
+    }
+    .small-box > .inner {
+        padding: 20px;
+        position: relative;
+        z-index: 5; /* Keep text above icons */
+    }
+    .small-box h3 {
+        font-size: 2.8rem !important;
+        font-weight: 800 !important;
+        margin: 0 0 5px 0 !important;
+        white-space: nowrap;
+        padding: 0;
+        color: #ffffff !important;
+        display: block !important;
+        line-height: 1.2;
+    }
+    .small-box p {
+        font-size: 1.15rem !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 600 !important;
+        margin-bottom: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .small-box .icon {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        z-index: 1;
+        font-size: 80px !important;
+        color: rgba(255, 255, 255, 0.25) !important;
+        transition: transform 0.3s ease-in-out;
+    }
+    .small-box:hover .icon {
+        transform: scale(1.15);
+        color: rgba(255, 255, 255, 0.35) !important;
+    }
+    .dashboard-card {
+        border-radius: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        margin-bottom: 0 !important;
+    }
+    .card-title-main {
+        font-size: 2rem !important;
+        color: #ffffff !important;
+        font-weight: 800 !important;
+        margin-bottom: 25px !important;
+        letter-spacing: 0.5px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Dashboard Statistics -->
+        <div class="col-12">
+            <div class="card dashboard-card mb-2">
+                <div class="card-header border-0 bg-transparent pl-0">
+                    <h3 class="card-title card-title-main">
+                        <i class="fas fa-tachometer-alt text-info mr-2"></i>
+                        Live System Overview
+                    </h3>
+                </div>
+                <div class="card-body pt-0 px-0">
+                    <div class="row">
+                        <!-- Grouped by Category -->
+                        
+                        <!-- Users & Roles -->
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>{{ admin_stats.total_registered_users }}</h3>
+                                    <p>Users</p>
+                                </div>
+                                <div class="icon"><i class="fas fa-users"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>{{ admin_stats.total_hotel_owners }}</h3>
+                                    <p>Hotel Owners</p>
+                                </div>
+                                <div class="icon"><i class="fas fa-user-tie"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>{{ admin_stats.total_managers }}</h3>
+                                    <p>Managers</p>
+                                </div>
+                                <div class="icon"><i class="fas fa-user-shield"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>{{ admin_stats.total_hotels }}</h3>
+                                    <p>Hotels</p>
+                                </div>
+                                <div class="icon"><i class="fas fa-hotel"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- Operations -->
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+                                    <h3>{{ admin_stats.total_rooms }}</h3>
+                                    <p>Rooms</p>
+                                </div>
+                                <div class="icon"><i class="fas fa-door-open"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-purple" style="background-color: #6f42c1 !important;">
+                                <div class="inner">
+                                    <h3>{{ admin_stats.total_bookings }}</h3>
+                                    <p>Bookings</p>
+                                </div>
+                                <div class="icon"><i class="fas fa-calendar-alt"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-olive" style="background-color: #3d9970 !important;">
+                                <div class="inner">
+                                    <h3>{{ admin_stats.active_bookings }}</h3>
+                                    <p>Active Now</p>
+                                </div>
+                                <div class="icon"><i class="fas fa-calendar-check"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-maroon" style="background-color: #d81b60 !important;">
+                                <div class="inner">
+                                    <h3>{{ admin_stats.completed_bookings }}</h3>
+                                    <p>Completed</p>
+                                </div>
+                                <div class="icon"><i class="fas fa-history"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- CRM -->
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-teal">
+                                <div class="inner">
+                                    <h3>{{ admin_stats.total_customers }}</h3>
+                                    <p>Customers</p>
+                                </div>
+                                <div class="icon"><i class="fas fa-user-friends"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-orange">
+                                <div class="inner">
+                                    <h3>{{ admin_stats.total_contact_queries }}</h3>
+                                    <p>Queries</p>
+                                </div>
+                                <div class="icon"><i class="fas fa-envelope"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Jazzmin App List -->
+    <div class="mt-2">
+        {{ block.super }}
+    </div>
+</div>
+{% endblock %}
