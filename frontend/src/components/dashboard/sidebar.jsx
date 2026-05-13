@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import NotificationBell from "./NotificationBell";
 
 const icons = {
   dashboard: (
@@ -39,6 +40,18 @@ const icons = {
       <circle cx="12" cy="7" r="4" />
     </svg>
   ),
+  approvals: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+  ),
+  email: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+      <polyline points="22,6 12,13 2,6" />
+    </svg>
+  ),
   analytics: (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <line x1="18" y1="20" x2="18" y2="10" />
@@ -61,6 +74,8 @@ const navItems = [
   { label: "Rooms", to: "/dashboard/rooms", icon: "rooms", end: true },
   { label: "Hotels", to: "/dashboard/hotels", icon: "hotels", end: true },
   { label: "Analytics", to: "/dashboard/analytics", icon: "analytics", end: true },
+  { label: "Email Alerts", to: "/dashboard/email-alerts", icon: "email", end: true },
+  { label: "Approvals", to: "/dashboard/approvals", icon: "approvals", end: true },
 ];
 
 function Sidebar(props) {
@@ -127,6 +142,7 @@ function Sidebar(props) {
 
       {/* Logout */}
       <div style={styles.bottom}>
+        <NotificationBell />
         <button
           onClick={() => navigate("/logout")}
           style={styles.logoutBtn}

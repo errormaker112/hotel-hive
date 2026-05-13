@@ -19,7 +19,6 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [company_name, setCompany_name] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -39,7 +38,7 @@ function Register() {
     const formData = new FormData();
     const data = {
       user: { first_name, last_name, email, password, password2 },
-      company_name,
+      company_name: "",
     };
     formData.append("data", JSON.stringify(data));
 
@@ -48,7 +47,7 @@ function Register() {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then(() => {
-        alert("Account created successfully!");
+        alert("Registration successful! Your account is pending admin approval. You will be notified once approved.");
         navigate("/login");
       })
       .catch((err) => {
@@ -144,21 +143,6 @@ function Register() {
                   onBlur={e => Object.assign(e.target.style, styles.input)}
                 />
               </div>
-            </div>
-
-            {/* Company */}
-            <div style={styles.field}>
-              <label style={styles.label}>Company name</label>
-              <input
-                type="text"
-                placeholder="Naveen & Co Pvt Ltd"
-                value={company_name}
-                onChange={(e) => setCompany_name(e.target.value)}
-                required
-                style={styles.input}
-                onFocus={e => Object.assign(e.target.style, styles.inputFocus)}
-                onBlur={e => Object.assign(e.target.style, styles.input)}
-              />
             </div>
 
             {/* Email */}

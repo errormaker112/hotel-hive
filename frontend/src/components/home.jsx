@@ -48,6 +48,9 @@ const Home = (props) => {
                             Get started free
                             <ArrowRight size={18} />
                         </button>
+                        <button onClick={() => navigate("/book")} style={S.heroBookBtn}>
+                            🏨 Book a Room
+                        </button>
                         <button onClick={() => props.scrollToSection("services")} style={S.heroSecondary}>
                             Learn more
                         </button>
@@ -250,6 +253,13 @@ const S = {
         border: "1.5px solid rgba(255,255,255,0.4)", borderRadius: "50px",
         padding: "14px 32px", fontSize: "16px", fontWeight: "500",
         cursor: "pointer", fontFamily: "inherit", backdropFilter: "blur(4px)",
+    },
+    heroBookBtn: {
+        display: "inline-flex", alignItems: "center", gap: "8px",
+        background: "#22C55E", color: "#fff",
+        border: "none", borderRadius: "50px",
+        padding: "14px 32px", fontSize: "16px", fontWeight: "600",
+        cursor: "pointer", fontFamily: "inherit",
     },
     statsBar: {
         display: "grid", gridTemplateColumns: "repeat(4, 1fr)",

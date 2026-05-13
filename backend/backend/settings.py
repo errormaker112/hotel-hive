@@ -251,3 +251,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'naveenmailbox2003@gmail.com'
 EMAIL_HOST_PASSWORD = 'ubhe sraa onsr gjce'
+RAZORPAY_KEY_ID = 'rzp_test_Smp4u5iGDd3wSl'
+RAZORPAY_KEY_SECRET = 'gD0pJSJbb9Qcoo3uCz97Jyg9'

@@ -2,6 +2,8 @@ from typing import Any
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .manager import UserManager
+
+
 # Create your models here.
 
 class CustomUser(AbstractUser):
@@ -11,7 +13,7 @@ class CustomUser(AbstractUser):
         (OWNER, 'Owner'),
         (MANAGER, 'Manager'),
     ]
-    
+
     username = None
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=20, blank=True)
@@ -24,16 +26,15 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
-    
+
 
 class Owner(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=200, blank=True)
+    is_approved = models.BooleanField(default=False)  # NEW: admin must approve before login
+
     def __str__(self) -> str:
         return self.user.email
-    
-
-
 
 
 class Hotel(models.Model):
@@ -43,9 +44,10 @@ class Hotel(models.Model):
     email = models.EmailField(blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     address = models.CharField(max_length=200, blank=True, null=True)
-    floors = models.PositiveIntegerField( default=0, null=True)
+    floors = models.PositiveIntegerField(default=0, null=True)
     ground_floor_rooms = models.PositiveIntegerField(default=0, null=True)
     total_rooms = models.PositiveIntegerField(default=0, null=True)
+
     def __str__(self) -> str:
         return self.name
 
@@ -53,6 +55,7 @@ class Hotel(models.Model):
 class Manager(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, null=True, blank=True) # type: ignore
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, null=True, blank=True)
+
     def __str__(self) -> str:
         return self.user.email

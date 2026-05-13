@@ -1,15 +1,22 @@
 from django.contrib import admin
-from .models import Contactus
+from .models import Contactus, Notification, EmailLog
 
-# Register your models here.
 
 @admin.register(Contactus)
 class ContactusAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'submitted_on', 'message_snippet')
-    list_filter = ('submitted_on',)
-    search_fields = ('name', 'email', 'message')
-    ordering = ('-submitted_on',)
+    list_display = ['name', 'email', 'message']
+    search_fields = ['name', 'email']
 
-    def message_snippet(self, obj):
-        return obj.message[:50] + '...' if len(obj.message) > 50 else obj.message
-    message_snippet.short_description = 'Message'
+
+@admin.register(Notification)
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = ['title', 'type', 'user_email', 'is_read', 'created_at']
+    list_filter = ['type', 'is_read']
+    search_fields = ['user_email', 'title']
+
+
+@admin.register(EmailLog)
+class EmailLogAdmin(admin.ModelAdmin):
+    list_display = ['email_type', 'recipient_name', 'recipient_email', 'hotel_name', 'status', 'sent_at']
+    list_filter = ['email_type', 'status']
+    search_fields = ['recipient_email', 'recipient_name', 'hotel_name']

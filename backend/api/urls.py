@@ -1,5 +1,6 @@
 from django.urls import path, re_path
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView
+from users.views import CustomTokenObtainPairView
 from users.views import *
 from hotel.views import *
 from room.views import *
@@ -8,9 +9,13 @@ from customer.views import *
 from .views import contactus
 from .public_views import public_hotels, public_rooms, public_bookings, public_book
 from .analytics_views import analyticsData
+from .notification_views import get_notifications, mark_read, mark_all_read
+from .email_log_views import get_email_logs
+from .approval_views import getPendingOwners, approveOwner, rejectOwner
+from .payment_views import create_order, verify_payment
 
 urlpatterns = [
-    path('token/', TokenObtainPairView.as_view(), name='get_token'),
+    path('token/', CustomTokenObtainPairView.as_view(), name='get_token'),
     path('token/refresh/', TokenRefreshView.as_view(), name='refresh'),
     path('user/owner/register/', createOwnerView, name='ownerregister'),
     path('user/manager/register/', createManagerView, name='managerregister'),
@@ -33,6 +38,23 @@ urlpatterns = [
 
     # Analytics
     path('analytics/', analyticsData, name='analytics'),
+
+    # Owner Approvals
+    path('approvals/pending/', getPendingOwners, name='pending_owners'),
+    path('approvals/approve/<int:owner_id>/', approveOwner, name='approve_owner'),
+    path('approvals/reject/<int:owner_id>/', rejectOwner, name='reject_owner'),
+
+    # Email Logs
+    path('email-logs/', get_email_logs, name='email_logs'),
+
+    # Notifications
+    path('notifications/', get_notifications, name='get_notifications'),
+    path('notifications/mark-read/<int:notification_id>/', mark_read, name='mark_read'),
+    path('notifications/mark-all-read/', mark_all_read, name='mark_all_read'),
+
+    # Payment
+    path('payment/create-order/', create_order, name='create_order'),
+    path('payment/verify/', verify_payment, name='verify_payment'),
 
     # Public guest booking routes (no auth required)
     path('public/hotels/', public_hotels, name='public_hotels'),

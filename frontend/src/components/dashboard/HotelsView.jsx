@@ -45,10 +45,7 @@ function Hotels(props) {
                                 <img
                                     src={
                                         (hotelList[activeIndex].image &&
-                                            `${
-                                                api.getUri() +
-                                                hotelList[activeIndex].image
-                                            }`) ||
+                                            `${api.getUri()}/media/${hotelList[activeIndex].image}`) ||
                                         im
                                     }
                                     alt={hotelList[activeIndex].name}
@@ -122,10 +119,7 @@ function Hotels(props) {
                                         <img
                                             src={
                                                 (value.image &&
-                                                    `${
-                                                        api.getUri() +
-                                                        value.image
-                                                    }`) ||
+                                                    `${api.getUri()}/media/${value.image}`) ||
                                                 im
                                             }
                                             alt="image"

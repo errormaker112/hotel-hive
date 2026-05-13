@@ -25,6 +25,8 @@ import api, { checkAuthorization } from "./api";
 import ManagersView from "./components/dashboard/ManagersView";
 import GuestBooking from "./components/GuestBooking";
 import AnalyticsView from "./components/dashboard/AnalyticsView";
+import EmailAlertsView from "./components/dashboard/EmailAlertsView";
+import ApprovalsView from "./components/dashboard/ApprovalsView";
 
 function Logout(props) {
     localStorage.clear();
@@ -139,6 +141,8 @@ const AppContent = (props) => {
                         <Route path="rooms" element={<RoomView role={role} />} />
                         <Route path="profile" element={<ProfileView role={role} />} />
                         <Route path="analytics" element={<AnalyticsView />} />
+                        <Route path="email-alerts" element={<EmailAlertsView />} />
+                        <Route path="approvals" element={<ApprovalsView />} />
                     </Route>
 
                     <Route path="/register" element={isLoggedin ? <Navigate to='/dashboard'/> : <Register />} />

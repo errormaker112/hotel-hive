@@ -17,6 +17,7 @@ from booking.models import Booking
 from customer.models import Customer
 from room.models import Room
 from users.models import Hotel
+from api.models import EmailLog
 import datetime
 
 
@@ -93,6 +94,17 @@ class Command(BaseCommand):
                     fail_silently=False,
                 )
 
+                # Log the email
+                EmailLog.objects.create(
+                    recipient_email=customer.email,
+                    recipient_name=f"{customer.first_name} {customer.last_name}",
+                    email_type=f"checkout_{reminder_type}",
+                    subject=subject,
+                    hotel_name=hotel.name,
+                    booking_id=booking.id,
+                    status='sent',
+                )
+
                 sent += 1
                 self.stdout.write(
                     self.style.SUCCESS(
@@ -102,6 +114,20 @@ class Command(BaseCommand):
 
             except Exception as e:
                 failed += 1
+                # Log failed email
+                try:
+                    EmailLog.objects.create(
+                        recipient_email=customer.email if customer else "unknown",
+                        recipient_name=f"{customer.first_name} {customer.last_name}" if customer else "unknown",
+                        email_type=f"checkout_{reminder_type}",
+                        subject=subject_prefix,
+                        hotel_name=hotel.name if hotel else "",
+                        booking_id=booking.id,
+                        status='failed',
+                        error_message=str(e),
+                    )
+                except Exception:
+                    pass
                 self.stdout.write(
                     self.style.ERROR(f"❌ Failed for booking #{booking.id}: {e}")
                 )
